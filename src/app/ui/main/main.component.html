@@ -1,0 +1,15 @@
+<input class="form-control" minlength="2" required type="text" name="inTxt" id="inTxt" [(ngModel)]="word"
+       placeholder="Enter string" #inTxt="ngModel" (keypress)="letterOnly($event)"
+       oninput="this.value = this.value.toLowerCase()">
+
+<button id="btn" (click)="checkPalindrome(word)">Check</button>
+<div *ngIf="inTxt.invalid && (inTxt.dirty || inTxt.touched)"
+     class="alert alert-danger">
+  <div *ngIf="inTxt.errors.required">
+    This is required.
+  </div>
+  <div *ngIf="inTxt.errors.minlength">
+    Must be at least 2 characters long.
+  </div>
+</div>
+<p id="result" [hidden]="inTxt.invalid"></p>
