@@ -23,15 +23,35 @@ export class MainComponent extends AppComponent implements OnInit, AfterViewInit
     let halfLen = Math.floor( len/2 );
     let result = document.getElementById("result");
     let words = txt.split(" ");
-    let i;
 
-    for( i = 0; i < halfLen; i++) {
+    for(let i = 0; i < halfLen; i++) {
       if( textNew[i] !== textNew[len-1-i]) {
         result.textContent = "Not a palindrome!";
         return;
       }
-      result.textContent = "Palindrome: “" + words[0] + "” n: " + 1
+      result.textContent = "Palindrome: “" + words[0] + "”";
     }
+
+    let n = 0;
+
+    words.forEach((w, index) => {
+      for (let i = 0 ; i < words.length ; i++) {
+        if (w === this.reverseString(w) || (i != index && w === this.reverseString(words[i]))) {
+          n++;
+          break;
+        }
+      }
+    });
+
+    result.textContent += " n: " + n
+  }
+
+  reverseString(str) {
+    let splitString = str.split("");
+
+    let reverseArray = splitString.reverse();
+
+    return reverseArray.join("");
   }
 
   letterOnly(event)
